@@ -1,8 +1,9 @@
 {
   "required": true,
-  "package": "xd.arkosammy.publicenderchest.mixin",
+  "package": "io.github.arkosammy12.publicenderchest.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "ScreenHandlerMixin",
     "ItemStackMixin",
     "ScreenHandlerMixin",
     "ServerPlayerEntityMixin",

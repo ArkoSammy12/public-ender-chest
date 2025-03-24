@@ -17,13 +17,13 @@
 	"entrypoints": {
 		"main": [
 			{
-				"value": "xd.arkosammy.publicenderchest.PublicEnderChest",
+				"value": "io.github.arkosammy12.publicenderchest.PublicEnderChest",
 				"adapter": "kotlin"
 			}
 		],
 		"client": [
 			{
-				"value": "xd.arkosammy.publicenderchest.PublicEnderChestClient",
+				"value": "io.github.arkosammy12.publicenderchest.PublicEnderChestClient",
 				"adapter": "kotlin"
 			}
 		]
@@ -36,11 +36,11 @@
 		}
 	],
 	"depends": {
-		"fabricloader": ">=0.16.9",
+		"fabricloader": ">=0.16.10",
 		"minecraft": ">=1.21.4",
 		"java": ">=21",
 		"fabric-api": "*",
 		"fabric-language-kotlin": "*",
-		"monkeyconfig" : "*"
+		"monkey-utils" : ">=1.0.0"
 	}
 }
