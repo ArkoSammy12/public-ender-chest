@@ -106,4 +106,4 @@ If you would like to report a bug, or make a suggestion, you can do so via the m
 
 ## Credits
 
-- Thanks to [Swanslab](https://github.com/swanslab) for the mod's icon and banner.
+- Thanks to [Kioku](https://github.com/takoyakioku) for the mod's icon and banner.
