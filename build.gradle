@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
 	id 'fabric-loom' version '1.10-SNAPSHOT'
 	id 'maven-publish'
@@ -59,7 +61,9 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-language-kotlin:${project.fabric_kotlin_version}"
 
 	// Monkey Utils
-	modImplementation("maven.modrinth:uApL7Qhc:${project.monkey_utils}")
+	modImplementation("maven.modrinth:uApL7Qhc:${project.monkey_utils}") {
+		transitive = true
+	}
 
 	// Monkey Config
 	include(implementation("io.github.arkosammy12:monkey-config:${project.monkey_config}"))
@@ -81,7 +85,7 @@ tasks.withType(JavaCompile).configureEach {
 	it.options.release = 21
 }
 
-tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+tasks.withType(KotlinCompile).configureEach {
 	kotlinOptions {
 		jvmTarget = 21
 	}
