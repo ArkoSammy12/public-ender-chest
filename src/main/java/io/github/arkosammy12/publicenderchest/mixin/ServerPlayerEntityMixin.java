@@ -108,12 +108,12 @@ public abstract class ServerPlayerEntityMixin extends PlayerEntity implements Se
         MutableText footerPrefix = Text.literal("--- ")
                 .formatted(Formatting.DARK_AQUA);
         MutableText footerPreviousPage = Text.literal("<< ")
-                .setStyle(Style.EMPTY.withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, String.format("/%s database query page %d", PublicEnderChest.MOD_ID, this.pageIndex))).withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Text.literal("Turn to previous page"))))
+                .setStyle(Style.EMPTY.withClickEvent(new ClickEvent.RunCommand(String.format("/%s database query page %d", PublicEnderChest.MOD_ID, this.pageIndex))).withHoverEvent(new HoverEvent.ShowText(Text.literal("Turn to previous page"))))
                 .formatted(Formatting.BLUE);
         MutableText footerMiddle = Text.literal(String.format("Showing page [%d of %d] ", pageIndex + 1, this.cachedLogs.size()))
                 .formatted(Formatting.AQUA);
         MutableText footerNextPage = Text.literal(">> ")
-                .setStyle(Style.EMPTY.withClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, String.format("/%s database query page %d", PublicEnderChest.MOD_ID, this.pageIndex + 2))).withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Text.literal("Turn to next page"))))
+                .setStyle(Style.EMPTY.withClickEvent(new ClickEvent.RunCommand(String.format("/%s database query page %d", PublicEnderChest.MOD_ID, this.pageIndex + 2))).withHoverEvent(new HoverEvent.ShowText(Text.literal("Turn to next page"))))
                 .formatted(Formatting.BLUE);
         MutableText footerSuffix = Text.literal("---")
                 .formatted(Formatting.DARK_AQUA);

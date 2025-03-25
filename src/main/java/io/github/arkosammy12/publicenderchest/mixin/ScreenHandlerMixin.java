@@ -13,7 +13,7 @@ import java.util.function.Supplier;
 @Mixin(ScreenHandler.class)
 public abstract class ScreenHandlerMixin {
 
-    @ModifyExpressionValue(method = "checkSlotUpdates", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;areEqual(Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;)Z"))
+    @ModifyExpressionValue(method = "checkSlotUpdates", at = @At(value = "INVOKE", target = "Lnet/minecraft/screen/sync/TrackedSlot;isInSync(Lnet/minecraft/item/ItemStack;)Z"))
     private boolean forceSlotUpdateForPublicInventory(boolean original, int slot, ItemStack stack, Supplier<ItemStack> copySupplier) {
         if (stack.isEmpty()) {
             return original;

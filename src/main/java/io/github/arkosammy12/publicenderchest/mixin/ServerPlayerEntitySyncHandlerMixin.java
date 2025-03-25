@@ -28,11 +28,11 @@ import java.util.List;
 @Mixin(targets = "net.minecraft.server.network.ServerPlayerEntity$1")
 public abstract class ServerPlayerEntitySyncHandlerMixin {
 
-    @Shadow @Final private ServerPlayerEntity field_29182;
+    @Shadow @Final ServerPlayerEntity field_58075;
 
     @WrapOperation(method = "updateSlot", at = @At(value = "NEW", target = "net/minecraft/network/packet/s2c/play/ScreenHandlerSlotUpdateS2CPacket"))
     private ScreenHandlerSlotUpdateS2CPacket modifySentItemStack(int syncId, int revision, int slot, ItemStack itemStack, Operation<ScreenHandlerSlotUpdateS2CPacket> original, ScreenHandler screenHandler) {
-        ServerPlayerEntity player = this.field_29182;
+        ServerPlayerEntity player = this.field_58075;
         if (!(screenHandler instanceof CustomGenericContainerScreenHandler customScreenHandler)) {
             return original.call(syncId, revision, slot, itemStack);
         }
