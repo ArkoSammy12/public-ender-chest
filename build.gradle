@@ -71,6 +71,8 @@ dependencies {
 	// JDBC
 	include(implementation("org.xerial:sqlite-jdbc:${project.jdbc_version}"))
 
+	include(modImplementation('me.lucko:fabric-permissions-api:0.4.0'))
+
 }
 
 processResources {

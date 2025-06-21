@@ -116,10 +116,10 @@ class PublicInventory(private val itemStacks: DefaultedList<ItemStack> = Default
                 val countDifference: Int = currentStack.count - previousStack.count
                 if (countDifference > 0) {
                     val insertAction: InventoryInteractionLog = InventoryInteractionLog.of(InventoryInteractionType.ITEM_INSERT, player, currentStack, countDifference)
-                    PublicEnderChest.DATABASE_MANAGER.logInventoryInteraction(insertAction, player.server)
+                    PublicEnderChest.DATABASE_MANAGER.logInventoryInteraction(insertAction, player.server!!)
                 } else if (countDifference < 0) {
                     val removeAction: InventoryInteractionLog = InventoryInteractionLog.of(InventoryInteractionType.ITEM_REMOVE, player, currentStack, countDifference)
-                    PublicEnderChest.DATABASE_MANAGER.logInventoryInteraction(removeAction, player.server)
+                    PublicEnderChest.DATABASE_MANAGER.logInventoryInteraction(removeAction, player.server!!)
                 }
                 continue
             }
@@ -130,11 +130,11 @@ class PublicInventory(private val itemStacks: DefaultedList<ItemStack> = Default
             // Log a removal and insertion based on the previous and current items stacks for the slot.
             if (!previousStack.isEmpty) {
                 val removeAction: InventoryInteractionLog = InventoryInteractionLog.of(InventoryInteractionType.ITEM_REMOVE, player, previousStack)
-                PublicEnderChest.DATABASE_MANAGER.logInventoryInteraction(removeAction, player.server)
+                PublicEnderChest.DATABASE_MANAGER.logInventoryInteraction(removeAction, player.server!!)
             }
             if (!currentStack.isEmpty) {
                 val insertAction: InventoryInteractionLog = InventoryInteractionLog.of(InventoryInteractionType.ITEM_INSERT, player, currentStack)
-                PublicEnderChest.DATABASE_MANAGER.logInventoryInteraction(insertAction, player.server)
+                PublicEnderChest.DATABASE_MANAGER.logInventoryInteraction(insertAction, player.server!!)
             }
 
         }
