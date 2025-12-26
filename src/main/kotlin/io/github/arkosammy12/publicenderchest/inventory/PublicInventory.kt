@@ -83,11 +83,8 @@ class PublicInventory(private val itemStacks: DefaultedList<ItemStack> = Default
         }
         val dimensionBlackListEnabled = PublicEnderChest.CONFIG_MANAGER.getRawBooleanSettingValue(ConfigUtils.ENABLE_DIMENSION_BLACKLIST) ?: false
         val dimensionBlackList: List<String> = PublicEnderChest.CONFIG_MANAGER.getRawStringListSettingValue(ConfigUtils.DIMENSION_BLACKLIST) ?: mutableListOf()
-        val currentWorld: String = player.world.registryKey.value.toString()
-        if (dimensionBlackListEnabled && dimensionBlackList.contains(currentWorld)) {
-            return false
-        }
-        return true
+        val currentWorld: String = player.entityWorld.registryKey.value.toString()
+        return !(dimensionBlackListEnabled && dimensionBlackList.contains(currentWorld))
     }
 
     override fun markDirty() {
@@ -116,10 +113,10 @@ class PublicInventory(private val itemStacks: DefaultedList<ItemStack> = Default
                 val countDifference: Int = currentStack.count - previousStack.count
                 if (countDifference > 0) {
                     val insertAction: InventoryInteractionLog = InventoryInteractionLog.of(InventoryInteractionType.ITEM_INSERT, player, currentStack, countDifference)
-                    PublicEnderChest.DATABASE_MANAGER.logInventoryInteraction(insertAction, player.server!!)
+                    PublicEnderChest.DATABASE_MANAGER.logInventoryInteraction(insertAction, player.entityWorld.server)
                 } else if (countDifference < 0) {
                     val removeAction: InventoryInteractionLog = InventoryInteractionLog.of(InventoryInteractionType.ITEM_REMOVE, player, currentStack, countDifference)
-                    PublicEnderChest.DATABASE_MANAGER.logInventoryInteraction(removeAction, player.server!!)
+                    PublicEnderChest.DATABASE_MANAGER.logInventoryInteraction(removeAction, player.entityWorld.server)
                 }
                 continue
             }
@@ -130,11 +127,11 @@ class PublicInventory(private val itemStacks: DefaultedList<ItemStack> = Default
             // Log a removal and insertion based on the previous and current items stacks for the slot.
             if (!previousStack.isEmpty) {
                 val removeAction: InventoryInteractionLog = InventoryInteractionLog.of(InventoryInteractionType.ITEM_REMOVE, player, previousStack)
-                PublicEnderChest.DATABASE_MANAGER.logInventoryInteraction(removeAction, player.server!!)
+                PublicEnderChest.DATABASE_MANAGER.logInventoryInteraction(removeAction, player.entityWorld.server)
             }
             if (!currentStack.isEmpty) {
                 val insertAction: InventoryInteractionLog = InventoryInteractionLog.of(InventoryInteractionType.ITEM_INSERT, player, currentStack)
-                PublicEnderChest.DATABASE_MANAGER.logInventoryInteraction(insertAction, player.server!!)
+                PublicEnderChest.DATABASE_MANAGER.logInventoryInteraction(insertAction, player.entityWorld.server)
             }
 
         }

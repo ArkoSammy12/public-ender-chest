@@ -6,6 +6,7 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.screen.*;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.*;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
@@ -31,6 +32,9 @@ public abstract class ServerPlayerEntityMixin extends PlayerEntity implements Se
     @Shadow @Final public MinecraftServer server;
 
     @Shadow public abstract void sendMessage(Text message);
+
+    @Shadow
+    public abstract ServerWorld getEntityWorld();
 
     @Unique
     private final List<List<InventoryInteractionLog>> cachedLogs = new ArrayList<>();
@@ -67,10 +71,7 @@ public abstract class ServerPlayerEntityMixin extends PlayerEntity implements Se
 
     @Override
     public void publicenderchest$showLogs(QueryContext queryContext) {
-        MinecraftServer server = this.getServer();
-        if (server == null) {
-            return;
-        }
+        MinecraftServer server = this.getEntityWorld().getServer();
         List<InventoryInteractionLog> results = PublicEnderChest.INSTANCE.getDATABASE_MANAGER().query(server, queryContext);
         if (results.isEmpty()) {
             this.sendMessage(Text.literal("No logs found for provided query!").formatted(Formatting.RED));
